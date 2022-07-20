@@ -1,3 +1,4 @@
+import json
 from utils.colors import *
 from utils.loadconfig import load_config
 import random
@@ -24,20 +25,27 @@ class QuestionPromptScreen:
     def show(self):
         config = load_config()
         
-        part1 = random.choice(config["questionParts"]["part1"])
-        part2 = random.choice(config["questionParts"]["part2"])
-        part3 = random.choice(config["questionParts"]["part3"])
+        #part1 = random.choice(config["questionParts"]["part1"])
+        #part2 = random.choice(config["questionParts"]["part2"])
+        #part3 = random.choice(config["questionParts"]["part3"])
+
+        category = 1
+        if category == 1:
+            newConfig = json.load(open("./configs/countries.json", "r"))
+            part1 = random.choice(newConfig["part1"])
+            part2 = random.choice(newConfig["part2"])
+            part3 = random.choice(newConfig["part3"])
 
         print(Colors.BLUE + "Question " + str(self.questionNumber) + Colors.RESET)
 
-        question = pluralise(part2) + " " + part1 + " " + part3
+        question = part1 + " " + part2 + " " + part3
 
         print(Colors.GREEN + self.get_random_mp().name + ": I propose that " + question + Colors.RESET)
 
         self.questions.append(question)
 
         if not self.fastMode:
-            time.sleep(1)
+            time.sleep(3)
 
         yes = 0
         no = 0
@@ -64,7 +72,7 @@ class QuestionPromptScreen:
         self.yesDict[question] = yes
         self.noDict[question] = no
         if not self.fastMode:
-            time.sleep(1)
+            time.sleep(3)
 
         os.system("cls")
 
