@@ -40,7 +40,7 @@ class MainMenuScreen:
             sys.exit()
 
         if number == 6:
-            generate_random_save()
+            generate_random_save("test.json")
 
         os.system("cls")
         self.show()

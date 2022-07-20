@@ -63,8 +63,25 @@ def generate_random_human(config):
     age = random.randint(config["mpData"]["minAge"], config["mpData"]["maxAge"])
     name = random.choice(config["mpData"]["names"])
 
-    print("")
+    return { "name": name.split(" ")[0], "surname":  name.split(" ")[1], "age": age}
 
 
 def generate_random_save(outputName):
     config = load_config()
+    parties = []
+
+    for i in range(2):
+        pm = generate_random_human(config)
+        mps = []
+        partyName = random.choice(config["partyNames"])
+
+        for i in range(650):
+            mps.append(generate_random_human(config))
+
+        parties.append({ "pm": pm, "mps": mps, "name": partyName })
+
+    speaker = generate_random_human(config)
+
+    finishedJSON = { "speaker": speaker, "parties": parties }
+
+    json.dump(finishedJSON, open("./saves/" + outputName + ".json", "w"))
