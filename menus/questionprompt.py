@@ -1,6 +1,8 @@
 from utils.colors import *
 from utils.loadconfig import load_config
 import random
+import time
+from utils.pluraliser import pluralise
 import os
 from utils.csvexport import csv_export
 
@@ -28,14 +30,14 @@ class QuestionPromptScreen:
 
         print(Colors.BLUE + "Question " + str(self.questionNumber) + Colors.RESET)
 
-        question = part2 + " " + part1 + " " + part3
+        question = pluralise(part2) + " " + part1 + " " + part3
 
         print(Colors.GREEN + self.get_random_mp().name + ": I propose that " + question + Colors.RESET)
 
         self.questions.append(question)
 
         if not self.fastMode:
-            input("Press enter to continue.")
+            time.sleep(1)
 
         yes = 0
         no = 0
@@ -47,20 +49,22 @@ class QuestionPromptScreen:
 
                 if rannum == 1:
                     yes += 1
+                    print(Colors.CYAN + f"{party.mps[i].name} {party.mps[i].surname} voted in favour of the motion.")
                 else:
                     no += 1
+                    print(Colors.CYAN + f"{party.mps[i].name} {party.mps[i].surname} voted in distaste of the motion.")
 
         if yes > no:
-            print(Colors.RED + self.save.speaker.name + ": " + part2 + " will " + part3[:-1] + "." + Colors.RESET)
+            print(Colors.RED + self.save.speaker.name + ": " + pluralise(part2) + " will " + part3[:-1] + "." + Colors.RESET)
         if no > yes:
-            print(Colors.GREEN + self.save.speaker.name + ": " + part2 + " will not " + part3[:-1] + "." + Colors.RESET)
+            print(Colors.GREEN + self.save.speaker.name + ": " + pluralise(part2) + " will not " + part3[:-1] + "." + Colors.RESET)
         if yes == no:
             print(Colors.CYAN + self.save.speaker.name + ": The vote is a draw." + Colors.RESET)
 
         self.yesDict[question] = yes
         self.noDict[question] = no
         if not self.fastMode:
-            input("Press enter to continue.")
+            time.sleep(1)
 
         os.system("cls")
 

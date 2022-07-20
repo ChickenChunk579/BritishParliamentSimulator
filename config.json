@@ -1,6 +1,6 @@
 {
     "questionsPerDay": 10,
-    "openFileWhenComplete": true,
+    "openFileWhenComplete": false,
     "questionParts": {
         "part1": [
             "should be"
