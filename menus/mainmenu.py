@@ -6,6 +6,8 @@ from game import Game
 from menus.createsave import CreateSaveScreen
 import os
 
+from utils.saves import generate_random_save
+
 class MainMenuScreen:
     def show(self):
         print(Colors.GREEN + "Welcome to British Parliment Simulator!" + Colors.RESET)
@@ -36,6 +38,9 @@ class MainMenuScreen:
 
         if number == 5:
             sys.exit()
+
+        if number == 6:
+            generate_random_save()
 
         os.system("cls")
         self.show()

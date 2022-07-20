@@ -63,6 +63,8 @@ def generate_random_human(config):
     age = random.randint(config["mpData"]["minAge"], config["mpData"]["maxAge"])
     name = random.choice(config["mpData"]["names"])
 
+    print("")
+
 
 def generate_random_save(outputName):
     config = load_config()
