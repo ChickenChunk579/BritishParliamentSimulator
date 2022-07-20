@@ -14,6 +14,11 @@ class QuestionPromptScreen:
         self.save = save
         self.fastMode = fastMode
 
+    def get_random_mp(self):
+        partyNumber = random.randrange(0, len(self.save.parties))
+        mp = random.choice(self.save.parties[partyNumber].mps)
+        return mp
+
     def show(self):
         config = load_config()
         
@@ -23,9 +28,9 @@ class QuestionPromptScreen:
 
         print(Colors.BLUE + "Question " + str(self.questionNumber) + Colors.RESET)
 
-        question = part1 + " " + part2 + " " + part3
+        question = part2 + " " + part1 + " " + part3
 
-        print(Colors.GREEN + question + Colors.RESET)
+        print(Colors.GREEN + self.get_random_mp().name + ": I propose that " + question + Colors.RESET)
 
         self.questions.append(question)
 
@@ -46,11 +51,11 @@ class QuestionPromptScreen:
                     no += 1
 
         if yes > no:
-            print(Colors.RED + part2 + " will " + part3[:-1] + "." + Colors.RESET)
+            print(Colors.RED + self.save.speaker.name + ": " + part2 + " will " + part3[:-1] + "." + Colors.RESET)
         if no > yes:
-            print(Colors.GREEN + part2 + " will not " + part3[:-1] + "." + Colors.RESET)
+            print(Colors.GREEN + self.save.speaker.name + ": " + part2 + " will not " + part3[:-1] + "." + Colors.RESET)
         if yes == no:
-            print(Colors.CYAN + "Draw" + Colors.RESET)
+            print(Colors.CYAN + self.save.speaker.name + ": The vote is a draw." + Colors.RESET)
 
         self.yesDict[question] = yes
         self.noDict[question] = no

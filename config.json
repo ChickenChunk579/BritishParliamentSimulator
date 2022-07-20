@@ -3,7 +3,7 @@
     "openFileWhenComplete": true,
     "questionParts": {
         "part1": [
-            "Should"
+            "should be"
         ],
         "part2": [
             "cheese",
