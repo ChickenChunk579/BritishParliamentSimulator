@@ -1,8 +1,7 @@
 {
     "questionsPerDay": 10,
-    "openFileWhenComplete": false,
-
-   "mpData": {
+    "openFileWhenComplete": true,
+    "mpData": {
         "names": [
             "Kanye Greaves",
             "Preston Stacey",

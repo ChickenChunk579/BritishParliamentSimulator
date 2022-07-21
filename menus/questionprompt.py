@@ -36,11 +36,12 @@ class QuestionPromptScreen:
             part2 = random.choice(newConfig["part2"])
             part3 = random.choice(newConfig["part3"])
 
+        randomMp = self.get_random_mp()
         print(Colors.BLUE + "Question " + str(self.questionNumber) + Colors.RESET)
 
         question = part1 + " " + part2 + " " + part3
 
-        print(Colors.GREEN + self.get_random_mp().name + ": I propose that " + question + Colors.RESET)
+        print(Colors.GREEN + randomMp.name + ": I propose that " + question + Colors.RESET)
 
         self.questions.append(question)
 
@@ -57,15 +58,15 @@ class QuestionPromptScreen:
 
                 if rannum == 1:
                     yes += 1
-                    print(Colors.CYAN + f"{party.mps[i].name} {party.mps[i].surname} voted in favour of the motion.")
+                    print(Colors.GREEN + f"{party.mps[i].name} {party.mps[i].surname} voted in favour of the motion." + Colors.RESET)
                 else:
                     no += 1
-                    print(Colors.CYAN + f"{party.mps[i].name} {party.mps[i].surname} voted in distaste of the motion.")
+                    print(Colors.RED + f"{party.mps[i].name} {party.mps[i].surname} voted in opposition to the motion." + Colors.RESET)
 
         if yes > no:
-            print(Colors.RED + self.save.speaker.name + ": " + pluralise(part2) + " will " + part3[:-1] + "." + Colors.RESET)
+            print(Colors.RED + self.save.speaker.name + ": The motion '" + question + "' has been rejected." + Colors.RESET)
         if no > yes:
-            print(Colors.GREEN + self.save.speaker.name + ": " + pluralise(part2) + " will not " + part3[:-1] + "." + Colors.RESET)
+            print(Colors.GREEN + self.save.speaker.name + ": The motion '" + question + "' has been rejected." + Colors.RESET)
         if yes == no:
             print(Colors.CYAN + self.save.speaker.name + ": The vote is a draw." + Colors.RESET)
 
