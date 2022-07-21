@@ -15,11 +15,11 @@ class Styles:
 
 import win32com.client
 
-print("Welcome to the British Parliment Simulator Installer.")
+print(Colors.BLUE + "Welcome to the British Parliment Simulator Installer." + Colors.RESET)
 input("Press enter to continue")
-print("Where do you want to install the simulator? ")
+print(Colors.GREEN + "Where do you want to install the simulator? " + Colors.RESET)
 loc = input("> ")
-print("Downloading...")
+print(Colors.GREEN + "Downloading...")
 urllib.request.urlretrieve("https://github.com/ChickenChunk579/BritishParliamentSimulator/archive/refs/heads/main.zip", "tmp.zip")
 print("Installing...")
 
@@ -27,15 +27,17 @@ import zipfile
 with zipfile.ZipFile("tmp.zip", 'r') as zip_ref:
     zip_ref.extractall(loc)
 
-print("Creating shortcuts...")
+print("Creating shortcuts..." + Colors.RESET)
 
-path = "./British Parliment Simulator.lnk"
-target = loc + '\BritishParliamentSimulator-main\main.py'
+path = os.path.join(os.environ["APPDATA"], "Microsoft", "Windows", "Start Menu", "Programs", "British Parliment Simulator.lnk")
+target = loc + "\BritishParliamentSimulator-main\main.py"
 icon = loc + '\BritishParliamentSimulator-main\logo.ico' # not needed, but nice
+workingDir = loc + '\BritishParliamentSimulator-main'
 
 shell = win32com.client.Dispatch("WScript.Shell")
 shortcut = shell.CreateShortCut(path)
 shortcut.Targetpath = target
 shortcut.IconLocation = icon
 shortcut.WindowStyle = 3 # 7 - Minimized, 3 - Maximized, 1 - Normal
+shortcut.WorkingDirectory = workingDir
 shortcut.save()
