@@ -75,7 +75,7 @@ def generate_random_save(outputName):
         mps = []
         partyName = random.choice(config["partyNames"])
 
-        for i in range(650):
+        for i in range(50):
             mps.append(generate_random_human(config))
 
         parties.append({ "pm": pm, "mps": mps, "name": partyName })

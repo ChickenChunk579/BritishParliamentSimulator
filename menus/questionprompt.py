@@ -29,9 +29,15 @@ class QuestionPromptScreen:
         #part2 = random.choice(config["questionParts"]["part2"])
         #part3 = random.choice(config["questionParts"]["part3"])
 
-        category = 1
+        category = random.randint(1,2)
         if category == 1:
             newConfig = json.load(open("./configs/countries.json", "r"))
+            part1 = random.choice(newConfig["part1"])
+            part2 = random.choice(newConfig["part2"])
+            part3 = random.choice(newConfig["part3"])
+
+        if category == 2:
+            newConfig = json.load(open("./configs/police.json", "r"))
             part1 = random.choice(newConfig["part1"])
             part2 = random.choice(newConfig["part2"])
             part3 = random.choice(newConfig["part3"])
